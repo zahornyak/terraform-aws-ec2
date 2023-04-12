@@ -46,7 +46,6 @@ module "ec2_instance" {
   vpc_security_group_ids = var.security_group_ids
   subnet_id              = var.subnet_id
   iam_instance_profile   = aws_iam_instance_profile.ec2_instance_profile.name
-  key_name               = "management-uptain-ds"
   user_data              = base64encode(data.template_file.user_data.rendered)
 
 

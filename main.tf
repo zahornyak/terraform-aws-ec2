@@ -48,7 +48,6 @@ module "ec2_instance" {
   iam_instance_profile   = aws_iam_instance_profile.ec2_instance_profile.name
   user_data              = base64encode(data.template_file.user_data.rendered)
 
-
 }
 
 resource "aws_iam_role" "instance_role" {
@@ -70,8 +69,11 @@ resource "aws_iam_role" "instance_role" {
 }
 EOF
 
-  managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
+  managed_policy_arns = concat([
+    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  ], var.managed_policy_arns)
 }
+
 
 #resource "aws_iam_policy_attachment" "ecs_instance_policy_attachment_ssm" {
 #  name       = "${var.server_name}_ecs_policy_attachemnt_ssm"

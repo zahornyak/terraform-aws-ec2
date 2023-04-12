@@ -40,3 +40,9 @@ variable "vars" {
   type        = map(string)
 }
 
+variable "managed_policy_arns" {
+  default     = []
+  description = "additional managed policy arns"
+  type        = list(string)
+}
+

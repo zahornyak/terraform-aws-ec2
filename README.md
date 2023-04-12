@@ -45,5 +45,7 @@
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_eip_ip"></a> [eip\_ip](#output\_eip\_ip) | public ip of instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

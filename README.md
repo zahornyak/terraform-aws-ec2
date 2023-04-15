@@ -56,7 +56,7 @@ module "ec2" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_ami"></a> [ami](#input\_ami) | custom ami id | `string` | `null` | no |
 | <a name="input_create_eip"></a> [create\_eip](#input\_create\_eip) | creates eip | `bool` | `true` | no |
-| <a name="input_instance_role"></a> [instance\_role](#input\_instance\_role) | custom instance role | `string` | `null` | no |
+| <a name="input_instance_profile"></a> [instance\_profile](#input\_instance\_profile) | custom instance profile | `string` | `null` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | instance type | `string` | `"t2.micro"` | no |
 | <a name="input_managed_policy_arns"></a> [managed\_policy\_arns](#input\_managed\_policy\_arns) | additional managed policy arns | `list(string)` | `[]` | no |
 | <a name="input_monitoring"></a> [monitoring](#input\_monitoring) | enable monitoring | `bool` | `true` | no |
@@ -71,5 +71,8 @@ module "ec2" {
 
 | Name | Description |
 |------|-------------|
+| <a name="output_ami_id"></a> [ami\_id](#output\_ami\_id) | ami id |
+| <a name="output_ec2_instance_profile"></a> [ec2\_instance\_profile](#output\_ec2\_instance\_profile) | ec2\_instance\_profile |
 | <a name="output_eip_ip"></a> [eip\_ip](#output\_eip\_ip) | public ip of instance |
+| <a name="output_instance_role"></a> [instance\_role](#output\_instance\_role) | ec2\_instance\_profile |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

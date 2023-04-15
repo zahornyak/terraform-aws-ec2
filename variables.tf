@@ -58,9 +58,9 @@ variable "ami" {
   type        = string
 }
 
-variable "instance_role" {
+variable "instance_profile" {
   default     = null
-  description = "custom instance role"
+  description = "custom instance profile"
   type        = string
 }
 

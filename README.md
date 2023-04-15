@@ -1,3 +1,23 @@
+# Terraform aws EC2 instance + ssm role + instance profile + custom user data + elastic ip creation
+
+Useful for fast creation of instance with ssm access
+
+### Example usage
+```hcl
+module "ec2" {
+  source  = "zahornyak/ec2/aws"
+
+  server_name        = "bastion"
+  security_group_ids = ["sg-05bd24bb429900190"]
+  subnet_id          = "subnet-0ddcde2aa05c988f9"
+
+  user_data_path = "files/init.sh"
+  vars = {
+    foo = "bar"
+  }
+}
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
@@ -24,7 +44,7 @@
 
 | Name | Type |
 |------|------|
-| [aws_eip.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
+| [aws_eip.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
 | [aws_iam_instance_profile.ec2_instance_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
 | [aws_iam_role.instance_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_ami.ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
@@ -34,6 +54,9 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_ami"></a> [ami](#input\_ami) | custom ami id | `string` | `null` | no |
+| <a name="input_create_eip"></a> [create\_eip](#input\_create\_eip) | creates eip | `bool` | `true` | no |
+| <a name="input_instance_role"></a> [instance\_role](#input\_instance\_role) | custom instance role | `string` | `null` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | instance type | `string` | `"t2.micro"` | no |
 | <a name="input_managed_policy_arns"></a> [managed\_policy\_arns](#input\_managed\_policy\_arns) | additional managed policy arns | `list(string)` | `[]` | no |
 | <a name="input_monitoring"></a> [monitoring](#input\_monitoring) | enable monitoring | `bool` | `true` | no |
@@ -41,6 +64,7 @@
 | <a name="input_server_name"></a> [server\_name](#input\_server\_name) | server\_name | `string` | `null` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | subnet\_id | `string` | `null` | no |
 | <a name="input_user_data_path"></a> [user\_data\_path](#input\_user\_data\_path) | user\_data\_path | `string` | `null` | no |
+| <a name="input_user_data_replace_on_change"></a> [user\_data\_replace\_on\_change](#input\_user\_data\_replace\_on\_change) | recreate on user data change | `bool` | `true` | no |
 | <a name="input_vars"></a> [vars](#input\_vars) | variable for user\_data | `map(string)` | `{}` | no |
 
 ## Outputs

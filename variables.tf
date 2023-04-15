@@ -46,3 +46,27 @@ variable "managed_policy_arns" {
   type        = list(string)
 }
 
+variable "create_eip" {
+  default     = true
+  description = "creates eip"
+  type        = bool
+}
+
+variable "ami" {
+  default     = null
+  description = "custom ami id"
+  type        = string
+}
+
+variable "instance_role" {
+  default     = null
+  description = "custom instance role"
+  type        = string
+}
+
+variable "user_data_replace_on_change" {
+  default     = true
+  description = "recreate on user data change"
+  type        = bool
+}
+

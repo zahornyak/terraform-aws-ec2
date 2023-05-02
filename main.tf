@@ -50,6 +50,7 @@ module "ec2_instance" {
   iam_instance_profile        = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
   user_data                   = base64encode(data.template_file.user_data.rendered)
   user_data_replace_on_change = var.user_data_replace_on_change
+  root_block_device           = var.root_block_device
 }
 
 resource "aws_iam_role" "instance_role" {

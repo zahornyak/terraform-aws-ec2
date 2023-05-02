@@ -70,3 +70,8 @@ variable "user_data_replace_on_change" {
   type        = bool
 }
 
+variable "root_block_device" {
+  description = "volume config"
+  type        = list(any)
+}
+

@@ -73,5 +73,6 @@ variable "user_data_replace_on_change" {
 variable "root_block_device" {
   description = "volume config"
   type        = list(any)
+  default     = []
 }
 

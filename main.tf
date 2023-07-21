@@ -98,7 +98,7 @@ resource "aws_eip" "this" {
 resource "aws_launch_configuration" "as_conf" {
   count = var.create_autoscaling_group ? 1 : 0
 
-  name                 = var.server_name
+  name_prefix          = var.server_name
   image_id             = var.ami != null ? var.ami : data.aws_ami.ami.id
   instance_type        = var.instance_type
   user_data            = base64encode(data.template_file.user_data.rendered)

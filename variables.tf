@@ -72,7 +72,26 @@ variable "user_data_replace_on_change" {
 
 variable "root_block_device" {
   description = "volume config"
-  type        = list(any)
+  type        = any
   default     = []
 }
+
+variable "create_autoscaling_group" {
+  description = "if create autoscaling group"
+  type        = bool
+  default     = false
+}
+
+variable "min_size" {
+  description = "min_size asg"
+  type        = number
+  default     = 1
+}
+
+variable "max_size" {
+  description = "max_size asg"
+  type        = number
+  default     = 1
+}
+
 

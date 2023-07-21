@@ -37,6 +37,7 @@ data "template_file" "user_data" {
 }
 
 module "ec2_instance" {
+  count   = var.create_autoscaling_group ? 0 : 1
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 4.3"
 
@@ -87,7 +88,56 @@ EOF
 #}
 
 resource "aws_eip" "this" {
-  count    = var.create_eip ? 1 : 0
-  instance = module.ec2_instance.id
+  count = var.create_eip && var.create_autoscaling_group == false ? 1 : 0
+
+  instance = module.ec2_instance[0].id
   vpc      = true
+}
+
+
+resource "aws_launch_configuration" "as_conf" {
+  count = var.create_autoscaling_group ? 1 : 0
+
+  name                 = var.server_name
+  image_id             = var.ami != null ? var.ami : data.aws_ami.ami.id
+  instance_type        = var.instance_type
+  user_data            = var.user_data_path
+  security_groups      = var.security_group_ids
+  iam_instance_profile = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
+
+  dynamic "root_block_device" {
+    for_each = var.root_block_device != null ? [1] : [0]
+    content {
+      delete_on_termination = try(root_block_device.value.delete_on_termination, null)
+      encrypted             = try(root_block_device.value.encrypted, null)
+      iops                  = try(root_block_device.value.iops, null)
+      throughput            = try(root_block_device.value.throughput, null)
+      volume_size           = try(root_block_device.value.volume_size, null)
+      volume_type           = try(root_block_device.value.volume_type, null)
+    }
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+
+
+resource "aws_autoscaling_group" "this" {
+  count = var.create_autoscaling_group ? 1 : 0
+
+  name                 = "${var.server_name}-asg"
+  launch_configuration = aws_launch_configuration.as_conf[0].id
+  min_size             = var.min_size
+  max_size             = var.max_size
+  vpc_zone_identifier  = [var.subnet_id]
+
+  tags = [
+    {
+      key                 = "Name"
+      value               = var.server_name
+      propagate_at_launch = "true"
+    }
+  ]
 }

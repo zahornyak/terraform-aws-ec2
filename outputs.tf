@@ -1,5 +1,5 @@
 output "eip_ip" {
-  value       = aws_eip.this[0].public_ip
+  value       = try(aws_eip.this[0].public_ip, null)
   description = "public ip of instance"
 }
 

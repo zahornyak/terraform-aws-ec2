@@ -101,7 +101,7 @@ resource "aws_launch_configuration" "as_conf" {
   name                 = var.server_name
   image_id             = var.ami != null ? var.ami : data.aws_ami.ami.id
   instance_type        = var.instance_type
-  user_data            = var.user_data_path
+  user_data            = base64encode(data.template_file.user_data.rendered)
   security_groups      = var.security_group_ids
   iam_instance_profile = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
 

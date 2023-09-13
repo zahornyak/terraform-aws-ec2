@@ -94,10 +94,4 @@ variable "max_size" {
   default     = 1
 }
 
-variable "associate_with_private_ip" {
-  description = "associate with private ip"
-  type        = string
-  default     = null
-}
-
 

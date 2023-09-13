@@ -57,7 +57,6 @@ module "ec2" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_ami"></a> [ami](#input\_ami) | custom ami id | `string` | `null` | no |
-| <a name="input_associate_with_private_ip"></a> [associate\_with\_private\_ip](#input\_associate\_with\_private\_ip) | associate with private ip | `string` | `null` | no |
 | <a name="input_create_autoscaling_group"></a> [create\_autoscaling\_group](#input\_create\_autoscaling\_group) | if create autoscaling group | `bool` | `false` | no |
 | <a name="input_create_eip"></a> [create\_eip](#input\_create\_eip) | creates eip | `bool` | `true` | no |
 | <a name="input_instance_profile"></a> [instance\_profile](#input\_instance\_profile) | custom instance profile | `string` | `null` | no |

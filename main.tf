@@ -90,8 +90,9 @@ EOF
 resource "aws_eip" "this" {
   count = var.create_eip && var.create_autoscaling_group == false ? 1 : 0
 
-  instance = module.ec2_instance[0].id
-  vpc      = true
+  instance                  = module.ec2_instance[0].id
+  associate_with_private_ip = var.associate_with_private_ip
+  vpc                       = true
 }
 
 

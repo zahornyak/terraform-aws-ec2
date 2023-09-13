@@ -3,8 +3,8 @@ output "eip_ip" {
   description = "public ip of instance"
 }
 
-output "eip_ip_private" {
-  value       = try(aws_eip.this[0].private_ip, null)
+output "private_id" {
+  value       = try(module.ec2_instance[0].private_ip, null)
   description = "private ip of instance"
 }
 

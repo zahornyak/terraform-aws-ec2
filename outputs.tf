@@ -3,6 +3,11 @@ output "eip_ip" {
   description = "public ip of instance"
 }
 
+output "eip_ip_private" {
+  value       = try(aws_eip.this[0].private_ip, null)
+  description = "private ip of instance"
+}
+
 output "ami_id" {
   value       = data.aws_ami.ami.id
   description = "ami id"

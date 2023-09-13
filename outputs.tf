@@ -3,7 +3,7 @@ output "eip_ip" {
   description = "public ip of instance"
 }
 
-output "private_id" {
+output "private_ip" {
   value       = try(module.ec2_instance[0].private_ip, null)
   description = "private ip of instance"
 }

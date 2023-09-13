@@ -81,5 +81,5 @@ module "ec2" {
 | <a name="output_ec2_instance_profile"></a> [ec2\_instance\_profile](#output\_ec2\_instance\_profile) | ec2\_instance\_profile |
 | <a name="output_eip_ip"></a> [eip\_ip](#output\_eip\_ip) | public ip of instance |
 | <a name="output_instance_role"></a> [instance\_role](#output\_instance\_role) | ec2\_instance\_profile |
-| <a name="output_private_id"></a> [private\_id](#output\_private\_id) | private ip of instance |
+| <a name="output_private_ip"></a> [private\_ip](#output\_private\_ip) | private ip of instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

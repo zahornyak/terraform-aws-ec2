@@ -88,13 +88,12 @@ EOF
 #}
 
 resource "aws_eip" "this" {
-  count = var.create_eip && var.create_autoscaling_group == false ? 1 : 0
+  count = var.create_eip ? 1 : 0
 
-  instance                  = module.ec2_instance[0].id
-  associate_with_private_ip = module.ec2_instance[0].private_ip
+  instance                  = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].id : null
+  associate_with_private_ip = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].private_ip : null
   vpc                       = true
 }
-
 
 resource "aws_launch_configuration" "as_conf" {
   count = var.create_autoscaling_group ? 1 : 0
@@ -105,6 +104,7 @@ resource "aws_launch_configuration" "as_conf" {
   user_data            = base64encode(data.template_file.user_data.rendered)
   security_groups      = var.security_group_ids
   iam_instance_profile = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
+
 
   dynamic "root_block_device" {
     for_each = var.root_block_device != null ? [1] : [0]

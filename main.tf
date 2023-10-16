@@ -100,7 +100,7 @@ resource "aws_eip" "this" {
 }
 
 resource "aws_launch_template" "lt" {
-  count = var.create_autoscaling_group && var.private_ip == null ? 1 : 0
+  count = var.create_autoscaling_group && var.private_ip != null ? 1 : 0
 
   name_prefix   = var.server_name
   image_id      = var.ami != null ? var.ami : data.aws_ami.ami.id
@@ -144,7 +144,7 @@ resource "aws_launch_template" "lt" {
 
 
 resource "aws_launch_configuration" "as_conf" {
-  count = var.create_autoscaling_group && var.private_ip != null ? 1 : 0
+  count = var.create_autoscaling_group && var.private_ip == null ? 1 : 0
 
   name_prefix          = var.server_name
   image_id             = var.ami != null ? var.ami : data.aws_ami.ami.id
@@ -177,7 +177,7 @@ resource "aws_autoscaling_group" "this" {
   count = var.create_autoscaling_group ? 1 : 0
 
   name                 = "${var.server_name}-asg"
-  launch_configuration = aws_launch_configuration.as_conf[0].id
+  launch_configuration = var.private_ip != null ? null : aws_launch_configuration.as_conf[0].id
 
   dynamic "launch_template" {
     for_each = var.private_ip != null ? [var.private_ip] : []

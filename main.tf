@@ -43,6 +43,8 @@ module "ec2_instance" {
 
   name = var.server_name
 
+  private_ip = var.private_ip
+
   ami                         = var.ami != null ? var.ami : data.aws_ami.ami.id
   instance_type               = var.instance_type
   monitoring                  = var.monitoring
@@ -99,49 +101,6 @@ resource "aws_eip" "this" {
   }
 }
 
-resource "aws_launch_template" "lt" {
-  count = var.create_autoscaling_group && var.private_ip != null ? 1 : 0
-
-  name_prefix   = var.server_name
-  image_id      = var.ami != null ? var.ami : data.aws_ami.ami.id
-  instance_type = var.instance_type
-  user_data     = base64encode(data.template_file.user_data.rendered)
-
-  iam_instance_profile {
-    name = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
-  }
-
-  vpc_security_group_ids = var.security_group_ids
-
-  dynamic "block_device_mappings" {
-    for_each = var.root_block_device != null ? [var.root_block_device] : []
-    content {
-      device_name = "/dev/xvda"
-
-      ebs {
-        delete_on_termination = try(block_device_mappings.value.delete_on_termination, null)
-        encrypted             = try(block_device_mappings.value.encrypted, null)
-        iops                  = try(block_device_mappings.value.iops, null)
-        throughput            = try(block_device_mappings.value.throughput, null)
-        volume_size           = try(block_device_mappings.value.volume_size, null)
-        volume_type           = try(block_device_mappings.value.volume_type, null)
-      }
-    }
-  }
-
-  dynamic "network_interfaces" {
-    for_each = var.private_ip != null ? [var.private_ip] : []
-    content {
-      associate_public_ip_address = true
-      private_ip_address          = var.private_ip
-    }
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 
 resource "aws_launch_configuration" "as_conf" {
   count = var.create_autoscaling_group && var.private_ip == null ? 1 : 0
@@ -177,15 +136,7 @@ resource "aws_autoscaling_group" "this" {
   count = var.create_autoscaling_group ? 1 : 0
 
   name                 = "${var.server_name}-asg"
-  launch_configuration = var.private_ip != null ? null : aws_launch_configuration.as_conf[0].id
-
-  dynamic "launch_template" {
-    for_each = var.private_ip != null ? [var.private_ip] : []
-    content {
-      id      = aws_launch_template.lt[0].id
-      version = "$Latest"
-    }
-  }
+  launch_configuration = aws_launch_configuration.as_conf[0].id
 
   min_size            = var.min_size
   max_size            = var.max_size

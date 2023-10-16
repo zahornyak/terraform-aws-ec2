@@ -93,6 +93,10 @@ resource "aws_eip" "this" {
   instance                  = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].id : null
   associate_with_private_ip = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].private_ip : null
   vpc                       = true
+
+  tags = {
+    Server_name = var.server_name
+  }
 }
 
 resource "aws_launch_configuration" "as_conf" {

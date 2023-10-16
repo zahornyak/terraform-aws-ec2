@@ -94,4 +94,16 @@ variable "max_size" {
   default     = 1
 }
 
+variable "private_ip" {
+  description = "private ip"
+  type        = string
+  default     = null
+}
+
+variable "architecture" {
+  description = "architecture"
+  type        = string
+  default     = "x86_64"
+}
+
 

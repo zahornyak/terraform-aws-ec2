@@ -14,7 +14,7 @@ data "aws_ami" "ami" {
 
   filter {
     name   = "architecture"
-    values = ["x86_64"]
+    values = [var.architecture]
   }
 
   filter {
@@ -91,7 +91,7 @@ resource "aws_eip" "this" {
   count = var.create_eip ? 1 : 0
 
   instance                  = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].id : null
-  associate_with_private_ip = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].private_ip : null
+  associate_with_private_ip = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].private_ip : var.private_ip
   vpc                       = true
 
   tags = {

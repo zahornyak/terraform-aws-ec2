@@ -57,6 +57,7 @@ module "ec2" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_ami"></a> [ami](#input\_ami) | custom ami id | `string` | `null` | no |
+| <a name="input_architecture"></a> [architecture](#input\_architecture) | architecture | `string` | `"x86_64"` | no |
 | <a name="input_create_autoscaling_group"></a> [create\_autoscaling\_group](#input\_create\_autoscaling\_group) | if create autoscaling group | `bool` | `false` | no |
 | <a name="input_create_eip"></a> [create\_eip](#input\_create\_eip) | creates eip | `bool` | `true` | no |
 | <a name="input_instance_profile"></a> [instance\_profile](#input\_instance\_profile) | custom instance profile | `string` | `null` | no |
@@ -65,6 +66,7 @@ module "ec2" {
 | <a name="input_max_size"></a> [max\_size](#input\_max\_size) | max\_size asg | `number` | `1` | no |
 | <a name="input_min_size"></a> [min\_size](#input\_min\_size) | min\_size asg | `number` | `1` | no |
 | <a name="input_monitoring"></a> [monitoring](#input\_monitoring) | enable monitoring | `bool` | `true` | no |
+| <a name="input_private_ip"></a> [private\_ip](#input\_private\_ip) | private ip | `string` | `null` | no |
 | <a name="input_root_block_device"></a> [root\_block\_device](#input\_root\_block\_device) | volume config | `any` | `[]` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | security\_group\_ids | `list(string)` | `null` | no |
 | <a name="input_server_name"></a> [server\_name](#input\_server\_name) | server\_name | `string` | `null` | no |

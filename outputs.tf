@@ -22,3 +22,8 @@ output "ec2_instance_profile" {
   value       = var.instance_profile == null ? aws_iam_instance_profile.ec2_instance_profile[0].name : null
   description = "ec2_instance_profile"
 }
+
+output "instance_id" {
+  value       = try(module.ec2_instance[0].id, null)
+  description = "instance id"
+}

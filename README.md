@@ -24,14 +24,14 @@ module "ec2" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.45 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.45 |
 | <a name="requirement_template"></a> [template](#requirement\_template) | ~> 2.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.45 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.45 |
 | <a name="provider_template"></a> [template](#provider\_template) | ~> 2.2 |
 
 ## Modules
@@ -82,6 +82,7 @@ module "ec2" {
 | <a name="output_ami_id"></a> [ami\_id](#output\_ami\_id) | ami id |
 | <a name="output_ec2_instance_profile"></a> [ec2\_instance\_profile](#output\_ec2\_instance\_profile) | ec2\_instance\_profile |
 | <a name="output_eip_ip"></a> [eip\_ip](#output\_eip\_ip) | public ip of instance |
+| <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | instance id |
 | <a name="output_instance_role"></a> [instance\_role](#output\_instance\_role) | ec2\_instance\_profile |
 | <a name="output_private_ip"></a> [private\_ip](#output\_private\_ip) | private ip of instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

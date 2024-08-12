@@ -106,4 +106,10 @@ variable "architecture" {
   default     = "x86_64"
 }
 
+variable "source_dest_check" {
+  description = "source_dest_check"
+  type        = bool
+  default     = null
+}
+
 

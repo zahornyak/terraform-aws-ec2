@@ -70,6 +70,7 @@ module "ec2" {
 | <a name="input_root_block_device"></a> [root\_block\_device](#input\_root\_block\_device) | volume config | `any` | `[]` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | security\_group\_ids | `list(string)` | `null` | no |
 | <a name="input_server_name"></a> [server\_name](#input\_server\_name) | server\_name | `string` | `null` | no |
+| <a name="input_source_dest_check"></a> [source\_dest\_check](#input\_source\_dest\_check) | source\_dest\_check | `bool` | `null` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | subnet\_id | `string` | `null` | no |
 | <a name="input_user_data_path"></a> [user\_data\_path](#input\_user\_data\_path) | user\_data\_path | `string` | `null` | no |
 | <a name="input_user_data_replace_on_change"></a> [user\_data\_replace\_on\_change](#input\_user\_data\_replace\_on\_change) | recreate on user data change | `bool` | `true` | no |

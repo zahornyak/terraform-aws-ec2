@@ -45,6 +45,8 @@ module "ec2_instance" {
 
   private_ip = var.private_ip
 
+  source_dest_check = var.source_dest_check
+
   ami                         = var.ami != null ? var.ami : data.aws_ami.ami.id
   instance_type               = var.instance_type
   monitoring                  = var.monitoring

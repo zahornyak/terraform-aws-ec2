@@ -84,19 +84,11 @@ EOF
   ], var.managed_policy_arns)
 }
 
-
-#resource "aws_iam_policy_attachment" "ecs_instance_policy_attachment_ssm" {
-#  name       = "${var.server_name}_ecs_policy_attachemnt_ssm"
-#  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-#  roles      = [aws_iam_role.instance_role.name]
-#}
-
 resource "aws_eip" "this" {
   count = var.create_eip ? 1 : 0
 
   instance                  = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].id : null
   associate_with_private_ip = var.create_eip && var.create_autoscaling_group == false ? module.ec2_instance[0].private_ip : var.private_ip
-  vpc                       = true
 
   tags = {
     Server_name = var.server_name
@@ -104,27 +96,38 @@ resource "aws_eip" "this" {
 }
 
 
-resource "aws_launch_configuration" "as_conf" {
-  count = var.create_autoscaling_group && var.private_ip == null ? 1 : 0
+resource "aws_launch_template" "as_template" {
+  count = var.create_autoscaling_group ? 1 : 0
 
-  name_prefix          = var.server_name
-  image_id             = var.ami != null ? var.ami : data.aws_ami.ami.id
-  instance_type        = var.instance_type
-  user_data            = base64encode(data.template_file.user_data.rendered)
-  security_groups      = var.security_group_ids
-  iam_instance_profile = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
+  name_prefix   = var.server_name
+  image_id      = var.ami != null ? var.ami : data.aws_ami.ami.id
+  instance_type = var.instance_type
+  user_data     = base64encode(data.template_file.user_data.rendered)
 
+  iam_instance_profile {
+    name = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
+  }
 
-  dynamic "root_block_device" {
-    for_each = var.root_block_device != null ? [1] : [0]
+  vpc_security_group_ids = var.security_group_ids
+
+  dynamic "block_device_mappings" {
+    for_each = var.root_block_device
     content {
-      delete_on_termination = try(root_block_device.value.delete_on_termination, null)
-      encrypted             = try(root_block_device.value.encrypted, null)
-      iops                  = try(root_block_device.value.iops, null)
-      throughput            = try(root_block_device.value.throughput, null)
-      volume_size           = try(root_block_device.value.volume_size, null)
-      volume_type           = try(root_block_device.value.volume_type, null)
+      device_name = "/dev/xvda"
+
+      ebs {
+        delete_on_termination = try(block_device_mappings.value.delete_on_termination, null)
+        encrypted             = try(block_device_mappings.value.encrypted, null)
+        iops                  = try(block_device_mappings.value.iops, null)
+        throughput            = try(block_device_mappings.value.throughput, null)
+        volume_size           = try(block_device_mappings.value.volume_size, null)
+        volume_type           = try(block_device_mappings.value.volume_type, null)
+      }
     }
+  }
+
+  network_interfaces {
+    private_ip_address = var.private_ip
   }
 
   lifecycle {
@@ -132,17 +135,19 @@ resource "aws_launch_configuration" "as_conf" {
   }
 }
 
-
-
 resource "aws_autoscaling_group" "this" {
   count = var.create_autoscaling_group ? 1 : 0
 
-  name                 = "${var.server_name}-asg"
-  launch_configuration = aws_launch_configuration.as_conf[0].id
+  name = "${var.server_name}-asg"
+  launch_template {
+    id      = aws_launch_template.as_template[0].id
+    version = "$Latest"
+  }
 
   min_size            = var.min_size
   max_size            = var.max_size
   vpc_zone_identifier = [var.subnet_id]
+
 
   tag {
     key                 = "Name"

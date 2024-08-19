@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.2.0...v0.2.1) (2024-08-19)
+
+
+### Bug Fixes
+
+* add dns names of the instance ([36fc850](https://github.com/zahornyak/terraform-aws-ec2/commit/36fc850f8c82bbb5524fd2e42d0ea39798c37c6b))
+
 ## [0.2.0](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.1.1...v0.2.0) (2024-08-19)
 
 

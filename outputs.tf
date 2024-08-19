@@ -27,3 +27,13 @@ output "instance_id" {
   value       = try(module.ec2_instance[0].id, null)
   description = "instance id"
 }
+
+output "private_dns_name" {
+  value       = try(module.ec2_instance.private_dns, null)
+  description = "private dns name"
+}
+
+output "public_dns_name" {
+  value       = try(module.ec2_instance.public_dns, null)
+  description = "public dns name"
+}

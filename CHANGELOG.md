@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.2.1...v0.3.0) (2024-08-28)
+
+
+### Features
+
+* scaling configs ([184b0bc](https://github.com/zahornyak/terraform-aws-ec2/commit/184b0bcf975d0b762ca7b0848f3f7f47fe836846))
+
 ## [0.2.1](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.2.0...v0.2.1) (2024-08-19)
 
 

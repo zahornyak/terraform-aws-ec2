@@ -112,4 +112,17 @@ variable "source_dest_check" {
   default     = null
 }
 
+variable "scale_up_config" {
+  description = "scale up config"
+  type        = any
+  default     = {}
+}
+
+variable "scale_down_config" {
+  description = "scale down config"
+  type        = any
+  default     = {}
+}
+
+
 

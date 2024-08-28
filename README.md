@@ -45,6 +45,10 @@ module "ec2" {
 | Name | Type |
 |------|------|
 | [aws_autoscaling_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group) | resource |
+| [aws_autoscaling_policy.scale_down](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy) | resource |
+| [aws_autoscaling_policy.scale_up](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy) | resource |
+| [aws_cloudwatch_metric_alarm.cpu_high](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) | resource |
+| [aws_cloudwatch_metric_alarm.cpu_low](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) | resource |
 | [aws_eip.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
 | [aws_iam_instance_profile.ec2_instance_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
 | [aws_iam_role.instance_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
@@ -68,6 +72,8 @@ module "ec2" {
 | <a name="input_monitoring"></a> [monitoring](#input\_monitoring) | enable monitoring | `bool` | `true` | no |
 | <a name="input_private_ip"></a> [private\_ip](#input\_private\_ip) | private ip | `string` | `null` | no |
 | <a name="input_root_block_device"></a> [root\_block\_device](#input\_root\_block\_device) | volume config | `any` | `[]` | no |
+| <a name="input_scale_down_config"></a> [scale\_down\_config](#input\_scale\_down\_config) | scale down config | `any` | `{}` | no |
+| <a name="input_scale_up_config"></a> [scale\_up\_config](#input\_scale\_up\_config) | scale up config | `any` | `{}` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | security\_group\_ids | `list(string)` | `null` | no |
 | <a name="input_server_name"></a> [server\_name](#input\_server\_name) | server\_name | `string` | `null` | no |
 | <a name="input_source_dest_check"></a> [source\_dest\_check](#input\_source\_dest\_check) | source\_dest\_check | `bool` | `null` | no |

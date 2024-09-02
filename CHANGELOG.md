@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.3.0...v0.3.1) (2024-09-02)
+
+
+### Bug Fixes
+
+* add scaling_termination_policies and scaling_default_cooldown ([011f34a](https://github.com/zahornyak/terraform-aws-ec2/commit/011f34a4c7849a59bec21ed1f070c34acaa31ddf))
+
 ## [0.3.0](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.2.1...v0.3.0) (2024-08-28)
 
 

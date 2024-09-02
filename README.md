@@ -74,6 +74,8 @@ module "ec2" {
 | <a name="input_root_block_device"></a> [root\_block\_device](#input\_root\_block\_device) | volume config | `any` | `[]` | no |
 | <a name="input_scale_down_config"></a> [scale\_down\_config](#input\_scale\_down\_config) | scale down config | `any` | `{}` | no |
 | <a name="input_scale_up_config"></a> [scale\_up\_config](#input\_scale\_up\_config) | scale up config | `any` | `{}` | no |
+| <a name="input_scaling_default_cooldown"></a> [scaling\_default\_cooldown](#input\_scaling\_default\_cooldown) | default cooldown | `number` | `300` | no |
+| <a name="input_scaling_termination_policies"></a> [scaling\_termination\_policies](#input\_scaling\_termination\_policies) | termination policies | `list(string)` | <pre>[<br>  "OldestInstance"<br>]</pre> | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | security\_group\_ids | `list(string)` | `null` | no |
 | <a name="input_server_name"></a> [server\_name](#input\_server\_name) | server\_name | `string` | `null` | no |
 | <a name="input_source_dest_check"></a> [source\_dest\_check](#input\_source\_dest\_check) | source\_dest\_check | `bool` | `null` | no |

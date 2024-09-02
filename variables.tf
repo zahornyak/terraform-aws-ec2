@@ -124,5 +124,17 @@ variable "scale_down_config" {
   default     = {}
 }
 
+variable "scaling_termination_policies" {
+  description = "termination policies"
+  type        = list(string)
+  default     = ["OldestInstance"]
+}
+
+variable "scaling_default_cooldown" {
+  description = "default cooldown"
+  type        = number
+  default     = 300
+}
+
 
 

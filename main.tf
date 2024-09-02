@@ -144,9 +144,11 @@ resource "aws_autoscaling_group" "this" {
     version = "$Latest"
   }
 
-  min_size            = var.min_size
-  max_size            = var.max_size
-  vpc_zone_identifier = [var.subnet_id]
+  min_size             = var.min_size
+  max_size             = var.max_size
+  vpc_zone_identifier  = [var.subnet_id]
+  termination_policies = var.scaling_termination_policies
+  default_cooldown     = var.scaling_default_cooldown
 
 
   tag {

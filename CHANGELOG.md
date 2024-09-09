@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.2](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.3.1...v0.3.2) (2024-09-09)
+
+
+### Bug Fixes
+
+* ebs device name ([9b92e93](https://github.com/zahornyak/terraform-aws-ec2/commit/9b92e933339712be1b128c86c7973e45e641aa37))
+
 ## [0.3.1](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.3.0...v0.3.1) (2024-09-02)
 
 

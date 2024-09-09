@@ -113,7 +113,7 @@ resource "aws_launch_template" "as_template" {
   dynamic "block_device_mappings" {
     for_each = var.root_block_device
     content {
-      device_name = "/dev/xvda"
+      device_name = try(block_device_mappings.value.device_name, "/dev/xvda")
 
       ebs {
         delete_on_termination = try(block_device_mappings.value.delete_on_termination, null)

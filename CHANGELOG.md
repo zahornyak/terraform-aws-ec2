@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.3](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.3.2...v0.3.3) (2024-12-23)
+
+
+### Bug Fixes
+
+* removed template provider ([fd63ed6](https://github.com/zahornyak/terraform-aws-ec2/commit/fd63ed63e8cd8b9f609c92bb922a5307b6dc2712))
+
 ## [0.3.2](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.3.1...v0.3.2) (2024-09-09)
 
 

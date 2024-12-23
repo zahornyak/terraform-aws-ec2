@@ -30,12 +30,6 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
   role = aws_iam_role.instance_role[0].name
 }
 
-data "template_file" "user_data" {
-  template = file(var.user_data_path)
-
-  vars = var.vars
-}
-
 module "ec2_instance" {
   count   = var.create_autoscaling_group ? 0 : 1
   source  = "terraform-aws-modules/ec2-instance/aws"
@@ -53,7 +47,7 @@ module "ec2_instance" {
   vpc_security_group_ids      = var.security_group_ids
   subnet_id                   = var.subnet_id
   iam_instance_profile        = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
-  user_data                   = base64encode(data.template_file.user_data.rendered)
+  user_data                   = base64encode(templatefile(var.user_data_path, var.vars))
   user_data_replace_on_change = var.user_data_replace_on_change
   root_block_device           = var.root_block_device
 }
@@ -102,7 +96,7 @@ resource "aws_launch_template" "as_template" {
   name_prefix   = var.server_name
   image_id      = var.ami != null ? var.ami : data.aws_ami.ami.id
   instance_type = var.instance_type
-  user_data     = base64encode(data.template_file.user_data.rendered)
+  user_data     = base64encode(templatefile(var.user_data_path, var.vars))
 
   iam_instance_profile {
     name = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name

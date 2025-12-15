@@ -33,7 +33,7 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
 module "ec2_instance" {
   count   = var.create_autoscaling_group ? 0 : 1
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 4.3"
+  version = "~> 5.0"
 
   name = var.server_name
 

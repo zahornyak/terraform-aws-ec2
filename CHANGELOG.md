@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.1](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.4.0...v0.4.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* add associate_public_ip_address support for EC2 instances and launch templates ([57db0ac](https://github.com/zahornyak/terraform-aws-ec2/commit/57db0ac641285c5b901c5394967090e79826576e))
+
 ## [0.4.0](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.3.3...v0.4.0) (2025-12-15)
 
 

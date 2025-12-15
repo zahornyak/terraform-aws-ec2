@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.3.3...v0.4.0) (2025-12-15)
+
+
+### Features
+
+* update AWS provider to >= 5.0 and ec2-instance module to ~> 5.0 ([58dd438](https://github.com/zahornyak/terraform-aws-ec2/commit/58dd4387808dead3b85595b4d6e71a88a5401ccd))
+
 ## [0.3.3](https://github.com/zahornyak/terraform-aws-ec2/compare/v0.3.2...v0.3.3) (2024-12-23)
 
 

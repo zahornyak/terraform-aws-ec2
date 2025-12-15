@@ -46,6 +46,7 @@ module "ec2_instance" {
   monitoring                  = var.monitoring
   vpc_security_group_ids      = var.security_group_ids
   subnet_id                   = var.subnet_id
+  associate_public_ip_address = var.associate_public_ip_address
   iam_instance_profile        = var.instance_profile != null ? var.instance_profile : aws_iam_instance_profile.ec2_instance_profile[0].name
   user_data                   = base64encode(templatefile(var.user_data_path, var.vars))
   user_data_replace_on_change = var.user_data_replace_on_change
@@ -121,7 +122,8 @@ resource "aws_launch_template" "as_template" {
   }
 
   network_interfaces {
-    private_ip_address = var.private_ip
+    private_ip_address          = var.private_ip
+    associate_public_ip_address = var.associate_public_ip_address
   }
 
   lifecycle {

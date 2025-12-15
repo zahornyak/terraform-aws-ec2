@@ -136,5 +136,11 @@ variable "scaling_default_cooldown" {
   default     = 300
 }
 
+variable "associate_public_ip_address" {
+  description = "associate public ip address"
+  type        = bool
+  default     = true
+}
+
 
 
